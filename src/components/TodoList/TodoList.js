@@ -29,7 +29,6 @@ export default class TodoList extends Component {
     }
 
     toggleDone = (id) => {
-        console.log(id);
         this.setState(({todoList}) => {
             const arrayIndex = todoList.findIndex((el) => el.id === id);
 
@@ -76,7 +75,7 @@ export default class TodoList extends Component {
     };
 
     addItem = (text) => {
-        const newItem = this.createTodoItem(text)
+        const newItem = this.createTodoItem(text);
 
         this.setState(({todoList}) => {
             const newArray = [
