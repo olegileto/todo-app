@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Todo from '../Todo/Todo';
 import Modal from '../Modal/Modal';
 import AddItemForm from '../AddItemForm/AddItemForm';
+import TodoHeader from '../TodoHeader/TodoHeader';
 
 export default class TodoList extends Component {
     constructor(props) {
@@ -91,9 +92,12 @@ export default class TodoList extends Component {
 
     render() {
         const {todoList} = this.state;
+        const doneCounter = this.state.todoList.filter((el) => el.done).length;
+        const todoCounter = this.state.todoList.length - doneCounter;
 
         return (
             <div className='TodoList'>
+                <TodoHeader todoCounter={todoCounter} doneCounter={doneCounter}/>
                 {todoList.map((todo, key) => {
                         return (
                             <div key={key}>
