@@ -29,36 +29,36 @@ export default class TodoList extends Component {
         }
     }
 
+    toggleProperty = (arr, id, propName) => {
+        const arrayIndex = arr.findIndex((el) => el.id === id);
+        const oldItem = arr[arrayIndex];
+
+        const newItem = {
+            ...oldItem,
+            [propName]: !oldItem[propName]
+        };
+
+        return [
+            ...arr.slice(0, arrayIndex),
+            newItem,
+            ...arr.slice(arrayIndex + 1)
+        ];
+    };
+
     toggleDone = (id) => {
         this.setState(({todoList}) => {
-            const arrayIndex = todoList.findIndex((el) => el.id === id);
-
-            const oldItem = todoList[arrayIndex];
-            const newItem = {
-                ...oldItem,
-                done: !oldItem.done
-            };
-
-            const newArray = [
-                ...todoList.slice(0, arrayIndex),
-                newItem,
-                ...todoList.slice(arrayIndex + 1)
-            ];
-
             return {
-                todoList: newArray
+                todoList: this.toggleProperty(todoList, id, 'done')
             }
         })
     };
 
     toggleModal = (id) => {
-        const {todoList} = this.state;
-        const modalAction = todoList.map(item => item.id === id ? {...item, modal: !item.modal} : item);
-
-        this.setState(prevState => ({
-            ...prevState,
-            todoList: [...modalAction]
-        }));
+        this.setState(({todoList}) => {
+            return {
+                todoList: this.toggleProperty(todoList, id, 'modal')
+            }
+        })
     };
 
     deleteItem = (id) => {
@@ -85,15 +85,15 @@ export default class TodoList extends Component {
             ];
 
             return {
-              todoList: newArray
+                todoList: newArray
             }
         })
     };
 
     render() {
         const {todoList} = this.state;
-        const doneCounter = this.state.todoList.filter((el) => el.done).length;
-        const todoCounter = this.state.todoList.length - doneCounter;
+        const doneCounter = todoList.filter((el) => el.done).length;
+        const todoCounter = todoList.length - doneCounter;
 
         return (
             <div className='TodoList'>
