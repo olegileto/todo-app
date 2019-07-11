@@ -18,9 +18,11 @@ export default class FilterPanel extends Component {
             <div className='FilterPanel'>
                 {this.buttons.map((button, key) => {
                     const isActive = filter === button.name;
+                    const activeClass = isActive ? 'active' : '';
+
                     return (
                         <button key={key} name={button.name}
-                                onClick={() => onFilter(button.name)}>{button.label}</button>
+                                onClick={() => onFilter(button.name)} className={activeClass}>{button.label}</button>
                     );
                 })}
             </div>

@@ -1,0 +1,308 @@
+body {
+    background-color: #d1cbc0;
+}
+
+.common-block {
+    width: 100%;
+}
+
+.TodoList {
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 500px;
+    min-height: 300px;
+    height: auto;
+    background-color: #f0f0f0;
+}
+
+.FilterPanel {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 85px 15px 85px;
+}
+
+.FilterPanel button {
+    background: none;
+    border: none;
+    font-family: Roboto, sans-serif;
+    color: #9a9a9a;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+}
+
+button.active {
+    color: #454545;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.panel {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.AddItemForm input {
+    width: 85%;
+    height: 40px;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
+.AddItemForm input:focus {
+    border: 2px solid #454545;
+}
+
+.AddItemForm input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #454545;
+    font-family: Roboto, sans-serif;
+}
+.AddItemForm input::-moz-placeholder { /* Firefox 19+ */
+    color: #454545;
+    font-family: Roboto, sans-serif;
+}
+.AddItemForm input:-ms-input-placeholder { /* IE 10+ */
+    color: #454545;
+    font-family: Roboto, sans-serif;
+}
+.AddItemForm input:-moz-placeholder { /* Firefox 18- */
+    color: #454545;
+    font-family: Roboto, sans-serif;
+}
+
+.SearchPanel {
+    width: 100%;
+}
+
+.SearchPanel input {
+    width: 40%;
+    height: 80px;
+    background-color: #9c504d;
+    font-family: Roboto, sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.SearchPanel input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #fff;
+}
+.SearchPanel input::-moz-placeholder { /* Firefox 19+ */
+    color: #fff;
+}
+.SearchPanel input:-ms-input-placeholder { /* IE 10+ */
+    color: #fff;
+}
+.SearchPanel input:-moz-placeholder { /* Firefox 18- */
+    color: #fff;
+}
+
+button.open-modal {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    font-size: 29px;
+    color: #f1f0f0;
+    background-color: #f1ab53;
+    cursor: pointer;
+    outline: none;
+    margin-left: 220px;
+    margin-bottom: 20px;
+    margin-top: 35px;
+
+    -webkit-box-shadow: 10px 10px 25px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 25px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 25px -6px rgba(0,0,0,0.75);
+
+    -webkit-transition: background-color .3s;
+    -moz-transition: background-color .3s;
+    -ms-transition: background-color .3s;
+    -o-transition: background-color .3s;
+    transition: background-color .3s;
+}
+
+button.open-modal:hover {
+    background-color: #d78318;
+}
+
+.modal-background {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+}
+
+.modal-background .AddItemForm {
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+    margin-top: 200px;
+    background-color: #f0f0f0;
+    height: 200px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.modal-background .AddItemForm h1 {
+    font-family: Roboto, sans-serif;
+    color: #454545;
+    text-transform: uppercase;
+}
+
+button.submit-form {
+    background-color: #636363;
+    color: #f0f0f0;
+    font-family: Roboto, sans-serif;
+    text-transform: uppercase;
+    border: none;
+    width: 200px;
+    height: 30px;
+    outline: none;
+    cursor: pointer;
+
+    -webkit-transition: background-color .3s;
+    -moz-transition: background-color .3s;
+    -ms-transition: background-color .3s;
+    -o-transition: background-color .3s;
+    transition: background-color .3s;
+}
+
+button.submit-form:hover {
+    background-color: #9c504d;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #636363;
+    font-family: Roboto, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+
+    -webkit-transition: color .3s;
+    -moz-transition: color .3s;
+    -ms-transition: color .3s;
+    -o-transition: color .3s;
+    transition: color .3s;
+}
+
+.close-modal:hover {
+    color: #454545;
+}
+
+.TodoHeader {
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.TodoHeader .todo-qty,
+.TodoHeader .done-qty {
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #454545;
+    font-weight: bold;
+}
+
+.TodoHeader .todo-qty-number {
+    margin-right: 5px;
+    color: #9c504d;
+}
+
+.TodoHeader .done-qty-number {
+    color: #9c504d;
+}
+
+.Todo {
+    position: relative;
+    width: 90%;
+    background-color: #fff;
+    height: 50px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    padding-top: 30px;
+    padding-left: 20px;
+
+    -webkit-box-shadow: -5px 7px 21px -16px rgba(0,0,0,0.58);
+    -moz-box-shadow: -5px 7px 21px -16px rgba(0,0,0,0.58);
+    box-shadow: -5px 7px 21px -16px rgba(0,0,0,0.58);
+}
+
+.Todo .todo-name {
+    color: #343434;
+    font-size: 15px;
+    font-family: Roboto, sans-serif;
+    font-weight: normal;
+}
+
+.done-block-visible {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 80px;
+    background-color: #60985b;
+    font-size: 23px;
+    color: #fff;
+}
+
+.done-block-visible span {
+    display: block;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.done-block-hidden {
+    display: none;
+}
+
+.Todo .todo-buttons {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    transition: .5s;
+}
+
+.Todo .todo-buttons button {
+    margin-right: 10px;
+    width: 80px;
+    height: 25px;
+    border: none;
+    font-family: Roboto, sans-serif;
+    text-transform: uppercase;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.Todo .todo-buttons button.done-btn {
+    background-color: #60985b;
+}
+
+.Todo .todo-buttons button.delete-btn {
+    background-color: #9c504d;
+}
+
+.Todo:hover .todo-buttons {
+    opacity: 1;
+}

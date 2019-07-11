@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-export default class AddItemForm extends Component{
+export default class AddItemForm extends Component {
     state = {
-      label: ''
+        label: '',
     };
 
     onLabelChange = (e) => {
@@ -16,16 +16,21 @@ export default class AddItemForm extends Component{
         this.props.onAdd(this.state.label);
 
         this.setState({
-            label: ''
-        })
+            label: '',
+        });
     };
 
     render() {
         return (
-            <form className='AddItemForm' onSubmit={this.onSubmit}>
-                <input type='text' placeholder='Add something to list...' onChange={this.onLabelChange} value={this.state.label}/>
-                <button>Add item</button>
-            </form>
+            <div className='modal-background'>
+                <form className='AddItemForm' onSubmit={this.onSubmit}>
+                    <span className='close-modal' onClick={this.props.onCloseModal}>X</span>
+                    <h1>Add new todo</h1>
+                    <input type='text' placeholder='Type something here...' onChange={this.onLabelChange}
+                           value={this.state.label}/><br/>
+                           <button className='submit-form'>Submit</button>
+                </form>
+            </div>
         )
     }
 }
