@@ -4,6 +4,8 @@ import Todo from '../Todo/Todo';
 import Modal from '../Modal/Modal';
 import AddItemForm from '../AddItemForm/AddItemForm';
 import TodoHeader from '../TodoHeader/TodoHeader';
+import SearchPanel from "../SearchPanel/SearchPanel";
+import FilterPanel from "../FilterPanel/FilterPanel";
 
 export default class TodoList extends Component {
     constructor(props) {
@@ -14,7 +16,9 @@ export default class TodoList extends Component {
                 this.createTodoItem('Make something with pleasure.'),
                 this.createTodoItem('Wake up you need make money!'),
                 this.createTodoItem('I do not wanna wake up today...'),
-            ]
+            ],
+            term: '',
+            filter: 'all'
         };
     }
 
@@ -90,15 +94,48 @@ export default class TodoList extends Component {
         })
     };
 
+    searchTodo = (arr, term) => {
+        if (term.length === 0) {
+            return arr;
+        }
+
+        return arr.filter((el) => el.todoName.toLowerCase().indexOf(term) > -1);
+    };
+
+    filterTodo = (arr, filter) => {
+        switch (filter) {
+            case 'all':
+                return arr;
+            case 'active':
+                return arr.filter((el) => !el.done);
+            case 'done':
+                return arr.filter((el) => el.done);
+            default:
+                return arr;
+        }
+    };
+
+    onSearch = (term) => {
+        this.setState({term})
+    };
+
+    onFilter = (filter) => {
+        this.setState({filter});
+    };
+
     render() {
-        const {todoList} = this.state;
+        const {todoList, term, filter} = this.state;
+        const visibleTodo = this.filterTodo(this.searchTodo(todoList, term), filter);
         const doneCounter = todoList.filter((el) => el.done).length;
         const todoCounter = todoList.length - doneCounter;
 
         return (
             <div className='TodoList'>
+                <SearchPanel onSearch={this.onSearch}/>
+                <FilterPanel filter={filter} onFilter={this.onFilter}/>
                 <TodoHeader todoCounter={todoCounter} doneCounter={doneCounter}/>
-                {todoList.map((todo, key) => {
+
+                {visibleTodo.map((todo, key) => {
                         return (
                             <div key={key}>
                                 <Todo

@@ -1,13 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const FilterPanel = () => {
-    return(
-        <div className='FilterPanel'>
-            <button>All</button>
-            <button>Active</button>
-            <button>Done</button>
-        </div>
-    )
-};
+export default class FilterPanel extends Component {
+    state = {
+        filter: 'all'
+    };
 
-export default FilterPanel;
+    buttons = [
+        {name: 'all', label: 'All'},
+        {name: 'active', label: 'Active'},
+        {name: 'done', label: 'Done'}
+    ];
+
+    render() {
+        const {filter, onFilter} = this.props;
+
+        return (
+            <div className='FilterPanel'>
+                {this.buttons.map((button, key) => {
+                    const isActive = filter === button.name;
+                    return (
+                        <button key={key} name={button.name}
+                                onClick={() => onFilter(button.name)}>{button.label}</button>
+                    );
+                })}
+            </div>
+        )
+    }
+}
+
