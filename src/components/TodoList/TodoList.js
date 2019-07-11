@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import './TodoList.css';
 
 import Todo from '../Todo/Todo';
-import Modal from '../Modal/Modal';
 import AddItemForm from '../AddItemForm/AddItemForm';
 import TodoHeader from '../TodoHeader/TodoHeader';
 import SearchPanel from "../SearchPanel/SearchPanel";
@@ -18,7 +18,8 @@ export default class TodoList extends Component {
                 this.createTodoItem('I do not wanna wake up today...'),
             ],
             term: '',
-            filter: 'all'
+            filter: 'all',
+            modal: false
         };
     }
 
@@ -29,7 +30,6 @@ export default class TodoList extends Component {
             id: this.maxId++,
             todoName: name,
             done: false,
-            modal: false
         }
     }
 
@@ -57,11 +57,9 @@ export default class TodoList extends Component {
         })
     };
 
-    toggleModal = (id) => {
-        this.setState(({todoList}) => {
-            return {
-                todoList: this.toggleProperty(todoList, id, 'modal')
-            }
+    toggleModal = () => {
+        this.setState({
+            modal: !this.state.modal
         })
     };
 
@@ -91,7 +89,9 @@ export default class TodoList extends Component {
             return {
                 todoList: newArray
             }
-        })
+        });
+
+        this.toggleModal();
     };
 
     searchTodo = (arr, term) => {
@@ -124,34 +124,38 @@ export default class TodoList extends Component {
     };
 
     render() {
-        const {todoList, term, filter} = this.state;
+        const {todoList, term, filter, modal} = this.state;
         const visibleTodo = this.filterTodo(this.searchTodo(todoList, term), filter);
         const doneCounter = todoList.filter((el) => el.done).length;
         const todoCounter = todoList.length - doneCounter;
 
         return (
-            <div className='TodoList'>
-                <SearchPanel onSearch={this.onSearch}/>
-                <FilterPanel filter={filter} onFilter={this.onFilter}/>
-                <TodoHeader todoCounter={todoCounter} doneCounter={doneCounter}/>
+            <div className='common-block'>
+                {modal ? <AddItemForm onAdd={this.addItem} onCloseModal={this.toggleModal}/> : null}
 
-                {visibleTodo.map((todo, key) => {
-                        return (
-                            <div key={key}>
-                                <Todo
-                                    todo={todo}
-                                    onDone={this.toggleDone}
-                                    onEdit={this.toggleModal}
-                                    onDelete={this.deleteItem}
-                                />
-                                {todo.modal ? <Modal todo={todo}/> : null}
-                            </div>
+                <div className='TodoList'>
+                    <SearchPanel onSearch={this.onSearch}/>
+                    <FilterPanel filter={filter} onFilter={this.onFilter}/>
 
-                        )
-                    }
-                )}
+                    <TodoHeader todoCounter={todoCounter} doneCounter={doneCounter}/>
 
-                <AddItemForm onAdd={this.addItem}/>
+                    <div className='list'>
+                        {visibleTodo.map((todo, key) => {
+                                return (
+                                    <div key={key}>
+                                        <Todo
+                                            todo={todo}
+                                            onDone={this.toggleDone}
+                                            onDelete={this.deleteItem}
+                                        />
+                                    </div>
+                                )
+                            }
+                        )}
+                    </div>
+
+                    <button onClick={this.toggleModal} className='open-modal'>+</button>
+                </div>
             </div>
         )
     }
